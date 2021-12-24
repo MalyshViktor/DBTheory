@@ -1,0 +1,3 @@
+﻿SELECT * FROM Sales
+ORDER BY
+Moment ASC
