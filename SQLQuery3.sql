@@ -1,1 +1,1 @@
-﻿SELECT * FROM Literals;
+﻿SELECT * FROM Literals
