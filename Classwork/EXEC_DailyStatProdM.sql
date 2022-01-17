@@ -1,0 +1,1 @@
+﻿EXEC DailyStatProdM '2020-01-17 12:00', 3

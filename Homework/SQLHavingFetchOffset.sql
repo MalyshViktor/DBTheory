@@ -64,10 +64,20 @@ SELECT
 	CONCAT (M.Surname, ' ', M.Name),
 	SUM(S.Cnt * P.Price)
 FROM
-	Managers M
-	JOIN Sales S ON S.ID_manager = M.Id
+	Sales S
+	JOIN Managers M ON M.Id = S.ID_manager
 	JOIN Products P ON P.Id = S.ID_product
 ORDER BY
-	M.Id
+	S.ID_manager
 OFFSET 3 ROWS
 FETCH NEXT 3 ROWS ONLY
+--***************************************************
+SELECT
+*
+FROM
+Products
+ORDER BY Id
+OFFSET
+(SELECT COUNT (id) FROM Products)/2
+ROWS
+--***************************************************
