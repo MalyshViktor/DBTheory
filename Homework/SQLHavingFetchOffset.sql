@@ -36,7 +36,7 @@ WHERE
 
 DECLARE @today DATE
 
-SET @today = '2020-01-14'
+SET @today = '2020-01-15'
 
 SELECT
 	MIN(P.Name)[Товар],
@@ -51,33 +51,27 @@ GROUP BY
 HAVING
 	SUM(P.Price * S.Cnt) > 
 (SELECT
-		AVG(S.Cnt * P.Price)
+	AVG(S.Cnt * P.Price)
 FROM
 	Sales S
 	JOIN Products P ON P.Id = S.ID_product)
 ORDER BY
-2 DESC
+	2 DESC
 
 --Вывести вторую тройку лидеров по продажам за сегодня (менеджеров)
 
 SELECT
-	CONCAT (M.Surname, ' ', M.Name),
-	SUM(S.Cnt * P.Price)
+	MAX(CONCAT(M.Surname, ' ', M.Name)) [Manager],
+	SUM(S.Cnt * P.Price) [Total]
 FROM
-	Sales S
+	Sales AS S
 	JOIN Managers M ON M.Id = S.ID_manager
 	JOIN Products P ON P.Id = S.ID_product
+WHERE
+	S.Moment BETWEEN  @today AND DATEADD(Day, 1, @today)
+GROUP BY
+	M.Id
 ORDER BY
-	S.ID_manager
+	SUM(S.Cnt * P.Price) DESC
 OFFSET 3 ROWS
 FETCH NEXT 3 ROWS ONLY
---***************************************************
-SELECT
-*
-FROM
-Products
-ORDER BY Id
-OFFSET
-(SELECT COUNT (id) FROM Products)/2
-ROWS
---***************************************************

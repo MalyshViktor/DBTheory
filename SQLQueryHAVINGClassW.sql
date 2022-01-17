@@ -15,7 +15,7 @@ WHERE
 GROUP BY
 	M.Id_main_dep	
 HAVING
-	SUM (P.Price * S.Cnt) <100000
-	AND SUM (P.Price * S.Cnt)>50000
+	SUM (P.Price * S.Cnt) <300000
+	AND SUM (P.Price * S.Cnt)>100000
 ORDER BY
 2 DESC
