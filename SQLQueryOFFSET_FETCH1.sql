@@ -1,8 +1,8 @@
 ﻿DECLARE @page INT
 DECLARE @perpage INT
 
-SET @page = 1 --считаем, что 1 - первая страница(не ноль)
-SET @perpage = COUNT(*)
+SET @page = 0 --считаем, что 1 - первая страница(не ноль)
+SET @perpage = 1
 
 SELECT
 	*
@@ -13,5 +13,5 @@ FROM
 	Managers P
 ORDER BY
 	P.Id 
-OFFSET @perpage * (@page -1) ROWS
+OFFSET @page ROWS
 FETCH NEXT @perpage ROWS ONLY) AS Tmp
