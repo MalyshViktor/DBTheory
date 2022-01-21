@@ -19,5 +19,5 @@ WHERE
 	AND DateAdd(HOUR, 3, '2020-01-17 12:00' )
 GROUP BY
 	S.ID_product) AS Tmp
-	RIGHT JOIN Products P ON Tmp.ID_product = P.Id
+	JOIN Products P ON Tmp.ID_product = P.Id
 END
